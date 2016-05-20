@@ -23,6 +23,7 @@ def parse_argv(argv):
     parser.add_argument("-o", dest="outdir", default="out",
                         help="The output dir you want")
    # parser.add_argument("-t",)
+    parser.add_argument("-s", dest="device", default="", help="Use -s to specific device")
     parser.add_argument("target_cmd", nargs=argparse.REMAINDER,
         help="This is the cmd you use the bin on android ,and you should use \'@@\' "
              "instead of your input files ")
@@ -130,7 +131,14 @@ def main(argv):
         print("you shold specific at least one option of -d or -f, use -h for more help!")
         sys.exit(-1)
 
-    devs = check_num_devices()
+    if not args.device:
+        devs = check_num_devices()
+    elif os.system("adb -s " + args.device + " root") == 0:
+        devs = [None] * 1
+        devs[0] = args.device
+    else:
+        print ("Please specific an available device!!")
+        sys.exit(-1)
 
     if os.path.isdir(args.outdir):
         shutil.rmtree(args.outdir)
