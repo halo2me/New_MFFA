@@ -1,5 +1,6 @@
 import sys
 import argparse
+import urlparse
 import subprocess
 import re
 import threading

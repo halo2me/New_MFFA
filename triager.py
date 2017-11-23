@@ -28,7 +28,7 @@ class Triager():
 
         regex_filename = re.compile("Filename:(\S*)")
         regex_address = re.compile("pc\s(\S*)")
-        regex_signal = re.compile("Fatal signal \d \((SIG[A-Z]+)\)")
+        regex_signal = re.compile("Fatal signal \d+ \((SIG[A-Z]+)\)")
 
         print 'Current devices is %s, and Current dir is %s' % (self.dev, self.dir_path)
 
